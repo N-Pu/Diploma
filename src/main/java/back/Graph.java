@@ -62,7 +62,7 @@ public class Graph {
 //
 //            }
         ArrayList<Integer> numbers = new ArrayList<>();
-        ArrayList<String> numbersWithCinIt = new ArrayList<>();
+//        ArrayList<String> numbersWithCinIt = new ArrayList<>();
         Random randomGenerator = new Random();
         int sizeOfList = randomGenerator.nextInt(max);
         while (numbers.size() < sizeOfList) {
