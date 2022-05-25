@@ -15,7 +15,7 @@ public class MainClass {
 //        System.out.println(random);
 
         Graph graph = new Graph();
-        graph.CreateGraph(10,71);
+        graph.CreateGraph(7,14);
 //        System.out.println(graph);
 
 
