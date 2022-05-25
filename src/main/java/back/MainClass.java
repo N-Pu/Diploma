@@ -14,8 +14,10 @@ public class MainClass {
 //        random.ints(13);
 //        System.out.println(random);
 
+        Random random = new Random();
+        random.nextInt();
         Graph graph = new Graph();
-        graph.CreateGraph(7,14);
+        graph.CreateGraph(graph.Randomizer(5, 30), graph.Randomizer(5, 30));
 //        System.out.println(graph);
 
 

@@ -42,8 +42,9 @@ public class Graph {
     }
 
 
-    public void Randomizer(int howMuchInOneKey) {
-        random.ints(howMuchInOneKey);
+    public int Randomizer(int min, int max) {
+
+        return (int)Math.floor(Math.random()*(max-min+1)+min);
     }
 
     public ArrayList<Integer> getRandomNumber(int max) {
