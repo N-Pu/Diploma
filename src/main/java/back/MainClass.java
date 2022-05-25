@@ -7,19 +7,8 @@ import java.util.Vector;
 public class MainClass {
     public static void main(String[] args) {
 
-
-//        Vector<String> nodes = new Vector<>();
-
-//        Random random = new Random();
-//        random.ints(13);
-//        System.out.println(random);
-
-        Random random = new Random();
-        random.nextInt();
         Graph graph = new Graph();
         graph.CreateGraph(graph.Randomizer(5, 30), graph.Randomizer(5, 30));
-//        System.out.println(graph);
-
 
     }
 }
