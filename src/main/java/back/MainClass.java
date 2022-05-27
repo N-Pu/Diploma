@@ -1,8 +1,6 @@
 package back;
 
-import java.util.Map;
-import java.util.Random;
-import java.util.Vector;
+
 
 public class MainClass {
     public static void main(String[] args) {
