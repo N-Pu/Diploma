@@ -4,6 +4,8 @@ import java.util.*;
 
 public class Graph {
 
+    //    My HashMap that contains keys as I's
+    //    and vectors as C's.
     private Map<String, ArrayList<Integer>> map = new HashMap<>();
 
     //    GRAPH CREATE WITH RANDOMIZER
@@ -19,13 +21,13 @@ public class Graph {
 
     }
 
-    //    In here we get random numbers between min and max
+    //    In here we get random numbers between min and max.
     public int Randomizer(int min, int max) {
         return (int) Math.floor(Math.random() * (max - min + 1) + min);
     }
 
     //    In here I put random numbers in to arraylist and then
-    //    return it to method CreateGraph
+    //    return it to method CreateGraph.
     public ArrayList<Integer> getRandomNumber(int max) {
         ArrayList<Integer> numbers = new ArrayList<>();
         Random randomGenerator = new Random();
