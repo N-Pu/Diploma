@@ -11,7 +11,7 @@ public class MainClass {
 //        Scanner scanner = new Scanner(System.in);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         Graph graph = new Graph();
-
+        int token = Integer.parseInt(br.readLine());
         boolean is_exit = false;
 
         while (!is_exit) {
@@ -24,7 +24,7 @@ public class MainClass {
                     [Exit]              : 0\s
                     """);
 
-            int token = Integer.parseInt(br.readLine());
+
             switch (token) {
                 case 1:
                     System.out.println("f");
