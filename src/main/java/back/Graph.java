@@ -10,6 +10,7 @@ public class Graph {
     private Map<String, ArrayList<Integer>> map = new HashMap<>();
     private int IndependentNodes, Clique;
 
+    private Queue<String> usedKeys = new ArrayDeque<>();
 
     //    GRAPH CREATE WITH RANDOMIZER
     //    Each key contains arrayList with integers in it
@@ -46,7 +47,7 @@ public class Graph {
     public ArrayList<Integer> getRandomNumber(int max) {
         ArrayList<Integer> numbers = new ArrayList<>();
         Random randomGenerator = new Random();
-        int sizeOfList = randomGenerator.nextInt(max);
+        int sizeOfList = randomGenerator.nextInt(max) + 1;
 
         while (numbers.size() < sizeOfList) {
 
@@ -61,14 +62,14 @@ public class Graph {
     }
 
 
-    public void CompareArraysForSectionC(Map<String, ArrayList<Integer>> map) {
-        this.map = map;
+    public void CompareArraysForSectionC() {
+//        this.map = map;
 //        boolean allNodesArePassed = true;
-        int NodeIChecker, NodeCChecker = 0;
+//        int NodeIChecker, NodeCChecker = 0;
 
         Map<String, ArrayList<Integer>> copyMap = map;
         Vector<Integer> copyINodes = new Vector<>(IndependentNodes);
-
+//        Queue<String> usedKeys = new ArrayDeque<>();
         int triangles = getSubGraphTriangle(IndependentNodes, Clique); // numbers of triangles
 
 
@@ -79,15 +80,45 @@ public class Graph {
 
         while (triangles != 0) {
 
-            for (int i = 0; i < map.size(); i++) {
-                ArrayList<Integer> currentArray = map.get("I" + i);
-                for (int j = 0; j < currentArray.size(); j++) {
-                    currentArray.get(i).
+            for (int i = 0; i < copyMap.size(); i++) {
+                ArrayList<Integer> currentArray = copyMap.get("I" + i);
+                for (int k = 1; k < copyMap.size(); k++) {
+                    ArrayList<Integer> copyOfNextArray = copyMap.get("I" + k);
+
+
+                    if (isKeyNotUsed("I" + i, "I" + k) && copyOfNextArray.retainAll(currentArray)) {  //are these Inodes already were used
+                        keysAddedInQueue("I" + i, "I" + k);
+                        System.out.println("I" + i + " -> " + copyOfNextArray.get(0) + " -> " + "I" + k);
+                        triangles--;
+                        continue;
+                    }
+
                 }
             }
 
-            triangles--;
+
         }
 
     }
+
+    //  checking if keys were already used
+    public boolean isKeyNotUsed(String firstKey, String secondKey) {
+
+        if (usedKeys.contains(firstKey) || usedKeys.contains(secondKey)) {
+            return false;
+
+        }
+
+        return true;
+    }
+
+    //  add keys in queue for checking them
+    public void keysAddedInQueue(String firstKey, String secondKey) {
+        usedKeys.add(firstKey);
+        usedKeys.add(secondKey);
+    }
+
 }
+
+
+
