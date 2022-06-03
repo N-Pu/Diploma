@@ -18,10 +18,12 @@ public class SituationC {
 
     public static void main(String[] args) {
         SituationC situationC = new SituationC();
-        situationC.CreateGraph(12, 6);
+        situationC.CreateGraph(6, 3);
         System.out.println("How much Triangle sub-graphs we need -> " + situationC.getSubGraphTriangles(10, 5));
         System.out.println("How much Sticks-n-Dots sub-graphs we need -> " + situationC.getSubGraphStickAndDots(10, 5));
 //        situationC.search_All_two_matches(C_to_N_Hash);
+        situationC.search_All_two_matches(C_to_N_Hash);
+
     }
 
 
@@ -30,7 +32,8 @@ public class SituationC {
         this.Clique = Clique;
 
         for (int k = 0; k < Clique; k++) {
-            C_to_N_Hash.put(k, getRandomNumber(IndependentNodes));
+            C_to_N_Hash.put(k, getRandomNumber(IndependentNodes));// putting numbers into each key
+            C_to_N_Hash.get(k).sort(Comparator.naturalOrder()); // sort numbers
             System.out.println("C" + k + " ->" + C_to_N_Hash.get(k));
 
         }
@@ -79,14 +82,29 @@ public class SituationC {
                 break;
 
             } else {
-                for (int j = 2 - 1; j >= 0; j--) {
-                    if (C_to_N_Hash.get(i).get(j) < IndependentNodes + j + 1 ){
+
+                for (int j = 0; j < C_to_N_Hash.get(i).size() - 1; j++) {
+//                    System.out.println(C_to_N_Hash.get(i).get(j) + "-" + C_to_N_Hash.get(i).get(j + 1));
+
+                    System.out.println("_____");
+
+                    for (int k = 0; k < C_to_N_Hash.get(i).size() - 1; k++) {
+
+                        System.out.println(C_to_N_Hash.get(i).get(j) + "-" + C_to_N_Hash.get(i).get(k + 1));
                     }
                 }
+
             }
         }
     }
 
 //    public  put_all_2_matches_in_every_Copy_Map
+
+
+    public void createObject(ArrayList<Integer> arrayOfI) {
+        Set<ArrayList<Integer>> set = new HashSet<>();
+        set.add(arrayOfI);
+    }
+
 
 }
