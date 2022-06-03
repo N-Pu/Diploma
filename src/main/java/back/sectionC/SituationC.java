@@ -75,36 +75,44 @@ public class SituationC {
         return numbers;
     }
 
+    //    public void search_All_two_matches(Map<Integer, ArrayList<Integer>> C_to_N_Hash) {
+    private Map.Entry<Integer, ArrayList<String>> makePara(ArrayList<Integer> object, int key) {
+        ArrayList<String> arrayList = new ArrayList<String>();
+        for (int i = 0; i < object.size() - 1; i++) {
+            for (int j = i + 1; j < object.size(); j++) {
+                String s = object.get(i).toString() + object.get(j).toString();
+                arrayList.add(s);
+            }
+        }
+        Map.Entry<Integer, ArrayList<String>> res = new AbstractMap.SimpleEntry<Integer, ArrayList<String>>(key, arrayList);
+        return res;
+    }
+
     public void search_All_two_matches(Map<Integer, ArrayList<Integer>> C_to_N_Hash) {
-        for (int i = 0; i < C_to_N_Hash.size(); i++) {
+        Map<Integer, ArrayList<String>> res = new HashMap<Integer, ArrayList<String>>();
+        for (Integer i = 0; i < C_to_N_Hash.size(); i++) {
             if (C_to_N_Hash.get(i).size() <= 1) {
                 System.err.println("NODE C" + i + " CONTAINS ONLY 1 I" + C_to_N_Hash.get(i));
                 break;
 
             } else {
-
-                for (int j = 0; j < C_to_N_Hash.get(i).size() - 1; j++) {
-//                    System.out.println(C_to_N_Hash.get(i).get(j) + "-" + C_to_N_Hash.get(i).get(j + 1));
-
-                    System.out.println("_____");
-
-                    for (int k = 0; k < C_to_N_Hash.get(i).size() - 1; k++) {
-
-                        System.out.println(C_to_N_Hash.get(i).get(j) + "-" + C_to_N_Hash.get(i).get(k + 1));
-                    }
-                }
-
+                System.out.println("||");
+                System.out.println(C_to_N_Hash.get(i));
+                System.out.println(makePara(C_to_N_Hash.get(i), i));
+                res.put(makePara(C_to_N_Hash.get(i), i).getKey(), makePara(C_to_N_Hash.get(i), i).getValue());
             }
         }
     }
+}
 
 //    public  put_all_2_matches_in_every_Copy_Map
 
 
-    public void createObject(ArrayList<Integer> arrayOfI) {
-        Set<ArrayList<Integer>> set = new HashSet<>();
-        set.add(arrayOfI);
-    }
+//    public void createObject(ArrayList<Integer> arrayOfI) {
+//        Set<ArrayList<Integer>> set = new HashSet<>();
+//        set.add(arrayOfI);
+//    }
 
 
-}
+
+
