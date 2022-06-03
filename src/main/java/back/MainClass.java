@@ -51,10 +51,13 @@ public class MainClass {
         int getIndependentNodesNum = graph.Randomizer(5, 30);
 
 
-        graph.CreateGraph(getIndependentNodesNum, getCliqueNum);
+        graph.CreateGraph(8, 4);
 
-        System.out.println("[Nodes in Clique] --> " + getCliqueNum);
-        System.out.println("[Nodes in IndependentNodes] --> " + getIndependentNodesNum);
+//        System.out.println("[Nodes in Clique] --> " + getCliqueNum);
+//        System.out.println("[Nodes in IndependentNodes] --> " + getIndependentNodesNum);
+
+        System.out.println("[Nodes in Clique] --> " + 3);
+        System.out.println("[Nodes in IndependentNodes] --> " + 6);
 
         graph.CompareArraysForSectionC();
 
