@@ -2,64 +2,49 @@ package back;
 
 
 import java.io.*;
+import java.util.Scanner;
 
 
 public class MainClass {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Please choice what split you wanna see:");
+        int msg;
+
+        do {
+            System.out.println("[Situation 1] -> 1");
+            System.out.println("[Situation 2] -> 2");
+            System.out.println("[Situation 3] -> 3");
+            System.out.println("[Situation 4] -> 4");
+            System.out.println("[Situation 5] -> 5");
+            System.out.println("[EXIT]        -> 0");
+            msg = input.nextInt();
 
 
-//        Scanner scanner = new Scanner(System.in);
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        Graph graph = new Graph();
-//        int token = Integer.parseInt(br.readLine());
-//        boolean is_exit = false;
+            switch (msg) {
 
-//        while (!is_exit) {
-//            System.out.println("""
-//                    [Situation A]       : 1
-//                    [Situation B]       : 2\s
-//                    [Situation C]       : 3\s
-//                    [Situation D]       : 4\s
-//                    [Situation E]       : 5\s
-//                    [Exit]              : 0\s
-//                    """);
-//
-//
-//            switch (token) {
-//                case 1:
-//                    System.out.println("f");
-//                    continue;
-//                case 2:
-//                    continue;
-//                case 3:
-//                    continue;
-//                case 4:
-//                    continue;
-//                case 5:
-//                    continue;
-//                case 0:
-//                    is_exit = true;
-//                    break;
-//            }
-//
-//
-//        }
+                case 1:
+                    System.out.println("1");
+                    break;
+                case 2:
+                    System.out.println("2");
+                    break;
+                case 3:
+                    System.out.println("3");
+                    break;
+                case 4:
+                    System.out.println("4");
+                    break;
+                case 5:
+                    System.out.println("5");
+                    break;
+                case 0:
+                default:
+                    System.out.println("[Wrong Number]");
+            }
 
-
-//        Graph graph = new Graph();
-        int getCliqueNum = graph.Randomizer(5, 30);
-        int getIndependentNodesNum = graph.Randomizer(5, 30);
-
-
-        graph.CreateGraph(8, 4);
-
-//        System.out.println("[Nodes in Clique] --> " + getCliqueNum);
-//        System.out.println("[Nodes in IndependentNodes] --> " + getIndependentNodesNum);
-
-        System.out.println("[Nodes in Clique] --> " + 3);
-        System.out.println("[Nodes in IndependentNodes] --> " + 6);
-
-        graph.CompareArraysForSectionC();
+        } while (msg != 0);
 
     }
+
 }
