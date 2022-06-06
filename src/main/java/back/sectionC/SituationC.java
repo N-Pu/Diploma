@@ -1,13 +1,15 @@
 package back.sectionC;
 
+import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class SituationC {
 
 
     //  Map<C,Array<N>> - every C node connected to N's array.
     private static Map<Integer, ArrayList<Integer>> C_to_N_Hash = new HashMap<>();
-    private static Map<Integer, ArrayList<Integer>> Copy_C_to_N_Hash = new HashMap<>();
+    private static Map<Integer, ArrayList<String>> map_C_pointers = new HashMap<>();
     //  Set where we pull out every 2 Integers and
     //  connecting them with every C node.
     private Set<Integer> connected_I_nodes = new HashSet<>();
@@ -17,11 +19,11 @@ public class SituationC {
 
     public static void main(String[] args) {
         SituationC situationC = new SituationC();
-        situationC.CreateGraph(4, 2);
+        situationC.CreateGraph(6, 3);
         System.out.println("How much Triangle sub-graphs we need -> " + situationC.getSubGraphTriangles(10, 5));
         System.out.println("How much Sticks-n-Dots sub-graphs we need -> " + situationC.getSubGraphStickAndDots(10, 5));
 
-        situationC.search_All_two_matches(C_to_N_Hash);
+        situationC.search_All_two_matches();
 
     }
 
@@ -31,7 +33,7 @@ public class SituationC {
         this.Clique = Clique;
 
         for (int k = 0; k < Clique; k++) {
-            C_to_N_Hash.put(k, getRandomNumber(IndependentNodes));// putting numbers into each key
+            C_to_N_Hash.put(k, getRandomNumber(IndependentNodes, 2));// putting numbers into each key
             C_to_N_Hash.get(k).sort(Comparator.naturalOrder()); // sort numbers
             System.out.println("C" + k + " ->" + C_to_N_Hash.get(k));
 
@@ -57,18 +59,23 @@ public class SituationC {
 
     //    In here I put random numbers in to arraylist and then
     //    return it to method CreateGraph.
-    public ArrayList<Integer> getRandomNumber(int max) {
+    public ArrayList<Integer> getRandomNumber(int max, int min) {
         ArrayList<Integer> numbers = new ArrayList<>();
         Random randomGenerator = new Random();
-        int sizeOfList = randomGenerator.nextInt(max) + 1;
+//        int sizeOfList = randomGenerator.nextInt();
+        int size = ThreadLocalRandom.current().nextInt(min, max); // new random from 2 elements
 
-        while (numbers.size() < sizeOfList) {
+        while (numbers.size() < size) {
 
             int random = randomGenerator.nextInt(max);
+//            int random2 = randomGenerator.nextInt(max);
 
             if (!numbers.contains(random)) {
                 numbers.add(random);
             }
+//            if (numbers.size() <= 1 && !numbers.contains(random2)) {
+//                numbers.add(random2);
+//            }
         }
 
         return numbers;
@@ -87,12 +94,18 @@ public class SituationC {
         return mapOfPairs;
     }
 
-    public void search_All_two_matches(Map<Integer, ArrayList<Integer>> C_to_N_Hash) {
+    public void search_All_two_matches() {
         Map<Integer, ArrayList<String>> mapOfPairs = new HashMap<>();
+        int check = 0;
+        int g = 0;
         for (Integer i = 0; i < C_to_N_Hash.size(); i++) {
             if (C_to_N_Hash.get(i).size() <= 1) {
-                System.err.println("NODE C" + i + " CONTAINS ONLY 1 I" + C_to_N_Hash.get(i));
-                System.exit(0);
+                g = i;
+                check = C_to_N_Hash.get(i).size();
+
+                System.err.println("NODE C" + i + " CONTAINS ONLY 1 I ->" + C_to_N_Hash.get(i));
+//                System.exit(0);
+                break;
 
 
             } else {
@@ -104,7 +117,13 @@ public class SituationC {
 
             }
         }
+
+        if (check == C_to_N_Hash.get(g).size()) {
+            System.exit(0);
+        }
+
         get_all_C(mapOfPairs);
+
     }
 
 
@@ -137,6 +156,13 @@ public class SituationC {
                 if (list.size() == needed_size_list) {
                     System.out.println("We founded what we needed! -> " + list);
                     i = map.get(0).size();
+                    int g = 0;
+
+                    for (int t = 0; t < list.size(); t = t + 2) {
+                        System.out.println("C" + g + " -> " + list.get(t) + " " + list.get(t + 1));
+                        g++;
+                    }
+
                     break;
                 }
 
