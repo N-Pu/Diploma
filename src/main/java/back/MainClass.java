@@ -4,13 +4,16 @@ package back;
 import back.sectionA.SituationA;
 import back.sectionC.SituationC;
 import back.sectionD.SituationD;
+import front.MyFrame;
 
+import java.awt.*;
 import java.io.*;
 import java.util.*;
 
 
 public class MainClass {
     public static void main(String[] args) {
+        new MyFrame();
         Map<Integer, ArrayList<Integer>> map = new HashMap<>();
         SituationA situationA = new SituationA();
         SituationC situationC = new SituationC();
