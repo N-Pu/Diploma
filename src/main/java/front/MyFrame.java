@@ -26,6 +26,7 @@ public class MyFrame extends JFrame implements ActionListener {
         SituationA situationA = new SituationA();
 
 
+
         button1 = new JButton();
         button1.setBounds(10, 30, 120, 40);
         button1.addActionListener(e -> situationA.CreateGraph(Randomizer(18, 30), Randomizer(1, 16)));
@@ -78,7 +79,7 @@ public class MyFrame extends JFrame implements ActionListener {
 
         button6 = new JButton();
         button6.setBounds(10, 400, 120, 50);
-        button6.addActionListener(e -> situationA.CreateGraph(18, 6));
+        button6.addActionListener(e -> situationA.CleanUp());
         button6.setText("CLEAN");
         button6.setFocusable(false);
         button6.setFont(new Font("Comic Sans", Font.BOLD, 16));
