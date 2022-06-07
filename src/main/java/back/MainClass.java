@@ -3,6 +3,7 @@ package back;
 
 import back.sectionA.SituationA;
 import back.sectionC.SituationC;
+import back.sectionD.SituationD;
 
 import java.io.*;
 import java.util.*;
@@ -13,6 +14,7 @@ public class MainClass {
         Map<Integer, ArrayList<Integer>> map = new HashMap<>();
         SituationA situationA = new SituationA();
         SituationC situationC = new SituationC();
+        SituationD situationD = new SituationD();
 
         Scanner input = new Scanner(System.in);
         Random random = new Random();
@@ -43,7 +45,14 @@ public class MainClass {
                     situationC.CreateGraph(8, 4);
                     situationC.search_All_two_matches();
                 }
-                case 4 -> System.out.println("4");
+                case 4 -> {
+                    situationD.CreateGraph(7,4);
+                    situationD.search_All_two_matches();
+                    situationD.get_graph_and_cut_fictitious_node();
+
+                }
+
+
                 case 5 -> System.out.println("5");
                 case 0 -> System.out.println("End of process...");
             }
