@@ -240,7 +240,7 @@ public class SituationD {
             String custed = Integer.toString(num_to_cut);
             if (!copy_list.contains(custed)) {
                 copy_list.clear();
-               break;
+                break;
             }
 
         }
@@ -253,6 +253,7 @@ public class SituationD {
                 }
             }
         }
+        System.out.println("[Our cutting number] -> " + "[" + num_to_cut + "]");
         System.out.println("This is our graph that we need ->" + C_to_N_Hash);
     }
 
