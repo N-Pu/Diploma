@@ -3,11 +3,20 @@ package front;
 import back.sectionA.SituationA;
 import back.sectionB.SituationB;
 import back.sectionC.SituationC;
+import back.sectionD.SituationD;
+import org.graphstream.graph.Graph;
+import org.graphstream.graph.implementations.SingleGraph;
+import org.graphstream.ui.swingViewer.ViewPanel;
+import org.graphstream.ui.view.Viewer;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.PrintStream;
+//import org.graphstream.ui.swingViewer.View;
+//import org.graphstream.ui.swingViewer.Viewer;
+
 
 public class MyFrame extends JFrame implements ActionListener {
     JButton button1;
@@ -16,7 +25,13 @@ public class MyFrame extends JFrame implements ActionListener {
     JButton button4;
     JButton button5;
     JButton button6;
-    JLabel label;
+    JLabel label1;
+    JLabel label2;
+    JLabel labelRandF;
+    JLabel labelRandS;
+    JPanel jPanel;
+//    Graph graph = new SingleGraph("Situation_C");
+
 
     public int Randomizer(int min, int max) {
         return (int) Math.floor(Math.random() * (max - min + 1) + min);
@@ -24,12 +39,17 @@ public class MyFrame extends JFrame implements ActionListener {
 
     public MyFrame() {
         SituationA situationA = new SituationA();
-
+        SituationC situationC = new SituationC();
+        SituationD situationD = new SituationD();
+        int randomFirst = Randomizer(18, 30);
+        int randomSecond = Randomizer(1, 16);
 
 
         button1 = new JButton();
         button1.setBounds(10, 30, 120, 40);
-        button1.addActionListener(e -> situationA.CreateGraph(Randomizer(18, 30), Randomizer(1, 16)));
+        button1.addActionListener(e -> situationA.CreateGraph(randomFirst, randomSecond));
+        button1.addActionListener(e -> labelRandF.setText(String.valueOf(randomFirst)));
+        button1.addActionListener(e -> labelRandS.setText(String.valueOf(randomFirst)));
         button1.setText("Situation A");
         button1.setFocusable(false);
         button1.setFont(new Font("Comic Sans", Font.BOLD, 17));
@@ -49,7 +69,10 @@ public class MyFrame extends JFrame implements ActionListener {
 
         button3 = new JButton();
         button3.setBounds(10, 150, 120, 40);
-        button3.addActionListener(e -> situationA.CreateGraph(18, 6));
+        button3.addActionListener(e -> situationC.action());
+//        button3.addActionListener(e -> situationC.CreateGraph(6, 3));
+//        button3.addActionListener(e-> situationC.search_All_two_matches());
+//        button3.addActionListener(e-> situationC.paintGraph(situationC.IndependentNodes);
         button3.setText("Situation C");
         button3.setFocusable(false);
         button3.setFont(new Font("Comic Sans", Font.BOLD, 16));
@@ -59,7 +82,7 @@ public class MyFrame extends JFrame implements ActionListener {
 
         button4 = new JButton();
         button4.setBounds(10, 210, 120, 40);
-        button4.addActionListener(e -> situationA.CreateGraph(18, 6));
+        button4.addActionListener(e -> situationD.action());
         button4.setText("Situation D");
         button4.setFocusable(false);
         button4.setFont(new Font("Comic Sans", Font.BOLD, 16));
@@ -80,12 +103,49 @@ public class MyFrame extends JFrame implements ActionListener {
         button6 = new JButton();
         button6.setBounds(10, 400, 120, 50);
         button6.addActionListener(e -> situationA.CleanUp());
+        button6.addActionListener(e -> situationC.CleanUp());
         button6.setText("CLEAN");
         button6.setFocusable(false);
         button6.setFont(new Font("Comic Sans", Font.BOLD, 16));
         button6.setForeground(Color.WHITE);
         button6.setBackground(Color.pink);
         button6.setBorder(BorderFactory.createCompoundBorder());
+
+        label1 = new JLabel("ã");
+//        label.setText("ã =" + situationC.IndependentNodes);
+        label1.setBounds(10, 310, 120, 50);
+        label1.setFont(new Font("Comic Sans", Font.BOLD, 40));
+        label1.setForeground(Color.DARK_GRAY);
+//        label1.setBackground(Color.pink);
+//        label1.setOpaque(true);
+
+        label2 = new JLabel("Ϭ");
+//        label.setText("ã =" + situationC.IndependentNodes);
+        label2.setBounds(10, 350, 120, 50);
+        label2.setFont(new Font("Comic Sans", Font.BOLD, 35));
+        label2.setForeground(Color.DARK_GRAY);
+
+        labelRandF = new JLabel();
+//        label.setText("ã =" + situationC.IndependentNodes);
+        labelRandF.setBounds(40, 310, 120, 50);
+        labelRandF.setFont(new Font("Comic Sans", Font.BOLD, 40));
+        labelRandF.setForeground(Color.DARK_GRAY);
+
+        labelRandS = new JLabel();
+//        label.setText("ã =" + situationC.IndependentNodes);
+        labelRandS.setBounds(40, 350, 120, 50);
+        labelRandS.setFont(new Font("Comic Sans", Font.BOLD, 35));
+        labelRandS.setForeground(Color.DARK_GRAY);
+        
+
+//        jPanel.setBounds(40, 350, 420, 500);
+//        jPanel.setDebugGraphicsOptions(JFrame.DISPOSE_ON_CLOSE);
+//        jPanel.setLayout(null);
+//        jPanel.setSize(750,750);
+
+
+//        jPanel.add(createEmbeddedView(graph, 1));
+//        jPanel.setBounds(20,30,200,200);
 
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -98,6 +158,9 @@ public class MyFrame extends JFrame implements ActionListener {
         this.add(button4);
         this.add(button5);
         this.add(button6);
+        this.add(label1);
+        this.add(label2);
+//        this.add(jPanel);
     }
 
 
@@ -105,4 +168,6 @@ public class MyFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
     }
+
+
 }

@@ -1,5 +1,10 @@
 package back.sectionD;
 
+import front.Styles;
+import org.graphstream.graph.Graph;
+import org.graphstream.graph.Node;
+import org.graphstream.graph.implementations.SingleGraph;
+
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
@@ -20,6 +25,8 @@ public class SituationD {
     private String todo;
     int num_to_cut = 0;
     private List<String> copy_list = new LinkedList<>();
+    Graph graph = new SingleGraph("Situation_D");
+    Styles styles = new Styles();
 
     public static void main(String[] args) {
         SituationD situationD = new SituationD();
@@ -27,7 +34,9 @@ public class SituationD {
         System.out.println("How much Triangle sub-graphs we need -> " + situationD.getSubGraphTriangles(7, 4));
         System.out.println("How much Sticks-n-Dots sub-graphs we need -> " + situationD.getSubGraphStickAndDots(7, 4));
         situationD.search_All_two_matches();
+        situationD.paintGraph(7);
         situationD.get_graph_and_cut_fictitious_node();
+
     }
 
 
@@ -260,6 +269,84 @@ public class SituationD {
     public String getNumForCut(String need_num) {
         return need_num;
     }
+
+    public void paintGraph(int IndependentNodes) {
+        System.setProperty("org.graphstream.ui.renderer", "org.graphstream.ui.j2dviewer.J2DGraphRenderer");
+//        graph.setAutoCreate(true);
+        graph.setAttribute("ui.stylesheet", styles.getStyleSheet());
+        System.out.println("-----------------");
+        for (int k = 0; k < IndependentNodes; k++) {
+            graph.addNode("I" + k);
+            graph.getNode("I" + k).setAttribute("xyz", 3, k, 2);
+            System.out.println("I" + k);
+        }
+        int g = 0;
+        int l = 0;
+        for (Node n : graph) {
+//            graph.getNode("I" + l).setAttribute("xyz", 8, 3 + g, 12);
+//            n.setAttribute("xyz", 1, 3 + g, 0);
+            System.out.println(n.getId());
+//            n.addAttribute("ui.stylesheet", styles.getStyleI());
+//            n.setAttribute("ui.class","node.important");
+            n.setAttribute("ui.style", "fill-color: rgb(200,100,205);");
+            g= g + 5;
+            l++;
+        }
+
+
+        for (int i = 0; i < C_to_N_Hash.size(); i++) {
+            graph.addNode("C" + i);
+            for (int j = 0; j < C_to_N_Hash.get(i).size(); j++) {
+//                graph.addNode("I" + C_to_N_Hash.get(i).get(j));
+                System.out.println("I" + j);
+                graph.addEdge("C" + i + "I" + C_to_N_Hash.get(i).get(j), "C" + i, "I" + C_to_N_Hash.get(i).get(j));
+                System.out.println("C" + i + "->" + "I" + C_to_N_Hash.get(i).get(j));
+            }
+        }
+
+        int u = 0;
+        for (Node node : graph) {
+            node.setAttribute("ui.label", node.getId());
+            System.out.println("Node " + "[" + u + "]" + " degree is -> " + node.getDegree());
+            u++;
+
+        }
+
+
+        System.out.println("-----------------");
+
+//        graph.display().enableAutoLayout();
+       graph.display().disableAutoLayout();
+
+
+
+//        boolean start_status = true;
+//        if (start_status){
+//            graph.clear();
+//        }
+
+
+    }
+    public  void action() {
+        SituationD situationD = new SituationD();
+        situationD.CreateGraph(7, 4);
+        System.out.println("How much Triangle sub-graphs we need -> " + situationD.getSubGraphTriangles(7, 4));
+        System.out.println("How much Sticks-n-Dots sub-graphs we need -> " + situationD.getSubGraphStickAndDots(7, 4));
+        situationD.search_All_two_matches();
+        situationD.paintGraph(7);
+        situationD.get_graph_and_cut_fictitious_node();
+
+    }
+
+
+
+    public void CleanUp() {
+//        if ()
+        graph.clear();
+    }
+
+
+
 
 }
 

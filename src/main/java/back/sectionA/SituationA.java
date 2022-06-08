@@ -61,12 +61,17 @@ public class SituationA {
             graph.addNode("I" + k);
             System.out.println("I" + k);
         }
-
+        int g = 0;
+        int l = 0;
         for (Node n : graph) {
+//            graph.getNode("I" + l).setAttribute("xyz", 8, 3 + g, 12);
+//            n.setAttribute("xyz", 1, 3 + g, 0);
             System.out.println(n.getId());
 //            n.addAttribute("ui.stylesheet", styles.getStyleI());
 //            n.setAttribute("ui.class","node.important");
-            n.setAttribute("ui.style", "fill-color: rgb(0,100,205);");
+            n.setAttribute("ui.style", "fill-color: rgb(200,100,205);");
+            g= g + 5;
+            l++;
         }
 
 
@@ -91,7 +96,9 @@ public class SituationA {
 
         System.out.println("-----------------");
 
-        graph.display().enableAutoLayout();
+       graph.display().enableAutoLayout();
+//       graph.display().disableAutoLayout();
+
 
 
 //        boolean start_status = true;
@@ -101,6 +108,9 @@ public class SituationA {
 
 
     }
+
+
+
 
     public void CleanUp() {
 //        if ()

@@ -1,7 +1,19 @@
 package back.sectionC;
 
+import front.Styles;
+import org.graphstream.graph.Edge;
+import org.graphstream.graph.Graph;
+import org.graphstream.graph.Node;
+import org.graphstream.graph.implementations.AbstractEdge;
+import org.graphstream.graph.implementations.SingleGraph;
+import org.graphstream.ui.graphicGraph.GraphicEdge;
+import org.graphstream.ui.swingViewer.ViewPanel;
+import org.graphstream.ui.view.Viewer;
+
+import java.awt.*;
 import java.io.IOException;
 import java.util.*;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class SituationC {
@@ -10,12 +22,16 @@ public class SituationC {
     //  Map<C,Array<N>> - every C node connected to N's array.
     private static Map<Integer, ArrayList<Integer>> C_to_N_Hash = new HashMap<>();
     private static Map<Integer, ArrayList<String>> map_C_pointers = new HashMap<>();
+    private static Graph graph1;
     //  Set where we pull out every 2 Integers and
     //  connecting them with every C node.
     private Set<Integer> connected_I_nodes = new HashSet<>();
     //  Map with all sub-graphs that I need.
     private Map<Integer, ArrayList<Integer>> Split_Sub_Graphs = new HashMap<>();
-    private int IndependentNodes, Clique;
+    public int IndependentNodes, Clique;
+    Graph graph = new SingleGraph("Situation_C");
+    Styles styles = new Styles();
+//    static Edge edge = new Graph();
 
     public static void main(String[] args) {
         SituationC situationC = new SituationC();
@@ -24,6 +40,8 @@ public class SituationC {
         System.out.println("How much Sticks-n-Dots sub-graphs we need -> " + situationC.getSubGraphStickAndDots(10, 5));
 
         situationC.search_All_two_matches();
+        situationC.paintGraph(situationC.IndependentNodes);
+//        edge.setAttribute("ui.style", "fill-color: rgb(200,100,205);");
 
     }
 
@@ -202,6 +220,94 @@ public class SituationC {
         System.out.println(list + "<- nothing here");
     }
 
+    public void paintGraph(int IndependentNodes) {
+        System.setProperty("org.graphstream.ui.renderer", "org.graphstream.ui.j2dviewer.J2DGraphRenderer");
+//        graph.setAutoCreate(true);
+        graph.setAttribute("ui.stylesheet", styles.getStyleSheet());
+        System.out.println("-----------------");
+        for (int k = 0; k < IndependentNodes; k++) {
+            graph.addNode("I" + k);
+            graph.getNode("I" + k).setAttribute("xyz", 3, k, 2);
+
+            System.out.println("I" + k);
+        }
+
+        for (Node n : graph) {
+            System.out.println(n.getId());
+//            n.addAttribute("ui.stylesheet", styles.getStyleI());
+//            n.setAttribute("ui.class","node.important");
+            n.setAttribute("ui.style", "fill-color: rgb(255,175,175);");
+        }
+
+
+        for (int i = 0; i < C_to_N_Hash.size(); i++) {
+            graph.addNode("C" + i);
+            for (int j = 0; j < C_to_N_Hash.get(i).size(); j++) {
+//                graph.addNode("I" + C_to_N_Hash.get(i).get(j));
+                System.out.println("I" + j);
+                graph.addEdge("C" + i + "I" + C_to_N_Hash.get(i).get(j), "C" + i, "I" + C_to_N_Hash.get(i).get(j));
+                System.out.println("C" + i + "->" + "I" + C_to_N_Hash.get(i).get(j));
+            }
+        }
+        int g = 0;
+        int l = 0;
+        int u = 0;
+        for (Node node : graph) {
+            node.setAttribute("ui.label", node.getId());
+//            graph.getNode("I" + l).setAttribute("xyz", 8, 3 + g, 12);
+            System.out.println("Node " + "[" + u + "]" + " degree is -> " + node.getDegree());
+            u++;
+            g= g + 5;
+            l++;
+        }
+
+//        for (Edge edge: graph){
+//
+//        }
+
+
+        System.out.println("-----------------");
+
+
+//        Edge C0I1 = graph.getEdge("C0I1");
+//        System.out.println(C0I1);
+
+        graph.display().disableAutoLayout();
+
+
+//        boolean start_status = true;
+//        if (start_status){
+//            graph.clear();
+//        }
+
+
+    }
+
+    public void CleanUp() {
+//        if ()
+        graph.clear();
+    }
+
+
+    public void action(){
+        SituationC situationC = new SituationC();
+        situationC.CreateGraph(8, 4);
+        System.out.println("How much Triangle sub-graphs we need -> " + situationC.getSubGraphTriangles(10, 5));
+        System.out.println("How much Sticks-n-Dots sub-graphs we need -> " + situationC.getSubGraphStickAndDots(10, 5));
+
+        situationC.search_All_two_matches();
+        situationC.paintGraph(situationC.IndependentNodes);
+//        graph1 = graph;
+//        createEmbeddedView();
+
+    }
+
+//    public static ViewPanel createEmbeddedView() {
+//        Viewer viewer = new Viewer(graph1, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
+//        ViewPanel view = viewer.addDefaultView(false);
+//        view.setPreferredSize(new Dimension((int) (698 ), (int) (440)));
+//        return view;
+//    }
 }
 
 

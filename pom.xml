@@ -42,7 +42,19 @@
             <artifactId>gs-ui</artifactId>
             <version>1.3</version>
         </dependency>
+
+
+<!--        <dependency>-->
+<!--            <groupId>org.graphstream</groupId>-->
+<!--            <artifactId>org.graphstream.ui.swingViewer.View</artifactId>-->
+<!--            <version>1.3<   /version>-->
+<!--        </dependency>-->
+
     </dependencies>
+
+
+
+
 
 
 </project>

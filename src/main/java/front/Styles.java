@@ -11,13 +11,13 @@ public class Styles {
 
     private static final String styleSheet =
             "edge {" +
-                    "	size: 2px;" +
-                    "	fill-color: red, yellow, green, #444;" +
+                    "	size: 4px;" +
+                    "	fill-color: #804;" +
                     "	fill-mode: dyn-plain;" +
                     "}" +
                     "node {" +
-                    "	size: 20px;" +
-                    "	fill-color: #00a86b;" +
+                    "	size: 30px;" +
+                    "	fill-color: #808080;" +
                     "}";
 
 
