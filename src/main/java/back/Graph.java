@@ -1,7 +1,5 @@
 package back;
 
-
-import java.sql.ClientInfoStatus;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -65,19 +63,14 @@ public class Graph {
 
 
     public void CompareArraysForSectionC() {
-//        this.map = map;
-//        boolean allNodesArePassed = true;
-//        int NodeIChecker, NodeCChecker = 0;
-
         Map<String, ArrayList<Integer>> copyMap = map;
         ArrayList<String> copyINodes = new ArrayList<>();
-//        Vector<Integer> usedCliqueNodes = new Vector<>();
-//        Queue<String> usedKeys = new ArrayDeque<>();
+
         int triangles = getSubGraphTriangle(IndependentNodes, Clique); // numbers of triangles
 
         Set<Integer> usedCNodes = new HashSet<>();
 
-//        Integer last_C_node = Randomizer(Clique, IndependentNodes);
+
         Integer last_C_node = 0;
 
         for (int k = 0; k < IndependentNodes; k++) {
@@ -93,7 +86,7 @@ public class Graph {
 
 
                     if (isKeyNotUsed("I" + i, "I" + k) && compareTwoArraysToGetNodeC(currentArray, copyOfNextArray)) {  //are these Inodes already were used
-//                        returnNodeC(currentArray, copyOfNextArray);
+
                         if (!usedCNodes.contains(returnFirstNodeC(currentArray, copyOfNextArray))) {
                             keysAddedInQueue("I" + i, "I" + k);
 
@@ -101,11 +94,11 @@ public class Graph {
                             System.out.println("I" + i + " -> " + copyOfNextArray.get(0) + " -> " + "I" + k);
 
                             triangles--;
-//                            k++;
+
 
                             if (triangles == 1) {
                                 copyINodes.removeAll(usedKeys); // we've got two keys that were not used
-//                            map.get(copyINodes.get(0)).add()
+
 
                                 while (!usedCNodes.contains(last_C_node)) {
                                     last_C_node++;
@@ -131,7 +124,7 @@ public class Graph {
 
     public boolean compareTwoArraysToGetNodeC(ArrayList<Integer> firstArrayList, ArrayList<Integer> secondArrayList) {
         Object NodeC = firstArrayList.stream().filter(secondArrayList::contains).collect(Collectors.toList());
-        return NodeC != null;
+        return true;
     }
 
     public int returnFirstNodeC(ArrayList<Integer> firstArrayList, ArrayList<Integer> secondArrayList) {
@@ -140,21 +133,10 @@ public class Graph {
     }
 
 
-//    public void getLastNodeC (){
-//        while (!usedCNodes.contains(last_C_node)){
-//            last_C_node++;
-//        }
-//    }
-
     //  checking if keys were already used
     public boolean isKeyNotUsed(String firstKey, String secondKey) {
 
-        if (usedKeys.contains(firstKey) || usedKeys.contains(secondKey)) {
-            return false;
-
-        }
-
-        return true;
+        return !usedKeys.contains(firstKey) && !usedKeys.contains(secondKey);
     }
 
     //  add keys in queue for checking them

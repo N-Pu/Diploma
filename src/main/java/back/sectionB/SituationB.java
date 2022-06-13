@@ -3,7 +3,6 @@ package back.sectionB;
 import front.Styles;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
-import org.graphstream.graph.implementations.MultiNode;
 import org.graphstream.graph.implementations.SingleGraph;
 
 import java.util.ArrayList;
@@ -15,8 +14,8 @@ public class SituationB {
 
     ArrayList<ArrayList<Integer>> upList = new ArrayList<>();
     Random random = new Random();
-    static int IndependentNodes = 4;
-    static int Clique = 8;
+    static int IndependentNodes = 2;
+    static int Clique = 4;
     Set<String> C_Set = new HashSet<>();
     Graph graph = new SingleGraph("Situation_B");
     Styles styles = new Styles();
@@ -32,7 +31,7 @@ public class SituationB {
         situationB.paintGraph(situationB.upList);
     }
 
-    public ArrayList<ArrayList<Integer>> fillUpArrayWithRandomNums(int IndependentNodes, int Clique) {
+    public void fillUpArrayWithRandomNums(int IndependentNodes, int Clique) {
 
         for (int i = 0; i < IndependentNodes; i++) {
             ArrayList<Integer> inList = new ArrayList<>();
@@ -47,7 +46,6 @@ public class SituationB {
                 System.out.println(integers);
             }
         }
-        return upList;
     }
 
     public void paintGraph(ArrayList<ArrayList<Integer>> upList) {
@@ -56,19 +54,14 @@ public class SituationB {
 
         for (int k = 0; k < IndependentNodes; k++) {
             graph.addNode("I" + k);
+            graph.getNode("I" + k).setAttribute("xyz", 3, k, 2);
         }
-
-//            System.out.println("____");
-//            System.out.println("I" + k);
-//            System.out.println("____");
 
         for (Node n : graph) {
             System.out.println(n.getId());
             n.setAttribute("ui.style", "fill-color: rgb(255,175,175);");
         }
         for (int k = 0; k < IndependentNodes; k++) {
-            graph.getNode("I" + k).setAttribute("xyz", 3, k, 2);
-
             for (int i = 0; i < upList.get(k).size(); i++) {
                 if (upList.get(k).get(i) == 1) {
                     if (!checkForC("C" + i)) {
@@ -90,8 +83,6 @@ public class SituationB {
 
         graph.display();
     }
-
-
 
 
     public boolean checkForC(String s) {

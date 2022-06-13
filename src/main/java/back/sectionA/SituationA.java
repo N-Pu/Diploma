@@ -3,14 +3,12 @@ package back.sectionA;
 import front.Styles;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
-import org.graphstream.graph.implementations.MultiGraph;
-import org.graphstream.graph.implementations.MultiNode;
 import org.graphstream.graph.implementations.SingleGraph;
-import org.graphstream.ui.view.Viewer;
+
 
 import java.util.*;
 
-import static front.Styles.style;
+
 
 public class SituationA {
     private int IndependentNodes, Clique;
@@ -54,7 +52,6 @@ public class SituationA {
 
     public void paintGraph(int IndependentNodes) {
         System.setProperty("org.graphstream.ui.renderer", "org.graphstream.ui.j2dviewer.J2DGraphRenderer");
-//        graph.setAutoCreate(true);
         graph.setAttribute("ui.stylesheet", styles.getStyleSheet());
         System.out.println("-----------------");
         for (int k = 0; k < IndependentNodes; k++) {
@@ -64,11 +61,7 @@ public class SituationA {
         int g = 0;
         int l = 0;
         for (Node n : graph) {
-//            graph.getNode("I" + l).setAttribute("xyz", 8, 3 + g, 12);
-//            n.setAttribute("xyz", 1, 3 + g, 0);
             System.out.println(n.getId());
-//            n.addAttribute("ui.stylesheet", styles.getStyleI());
-//            n.setAttribute("ui.class","node.important");
             n.setAttribute("ui.style", "fill-color: rgb(200,100,205);");
             g= g + 5;
             l++;
@@ -78,7 +71,6 @@ public class SituationA {
         for (int i = 0; i < C_to_N_Hash.size(); i++) {
             graph.addNode("C" + i);
             for (int j = 0; j < C_to_N_Hash.get(i).size(); j++) {
-//                graph.addNode("I" + C_to_N_Hash.get(i).get(j));
                 System.out.println("I" + j);
                 graph.addEdge("C" + i + "I" + C_to_N_Hash.get(i).get(j), "C" + i, "I" + C_to_N_Hash.get(i).get(j));
                 System.out.println("C" + i + "->" + "I" + C_to_N_Hash.get(i).get(j));
@@ -97,23 +89,10 @@ public class SituationA {
         System.out.println("-----------------");
 
        graph.display().enableAutoLayout();
-//       graph.display().disableAutoLayout();
-
-
-
-//        boolean start_status = true;
-//        if (start_status){
-//            graph.clear();
-//        }
-
 
     }
 
-
-
-
     public void CleanUp() {
-//        if ()
         graph.clear();
     }
 }

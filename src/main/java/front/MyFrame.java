@@ -104,8 +104,7 @@ public class MyFrame extends JFrame implements ActionListener {
         label1.setBounds(10, 310, 220, 50);
         label1.setFont(new Font("Comic Sans", Font.BOLD, 40));
         label1.setForeground(Color.DARK_GRAY);
-//        label1.setBackground(Color.pink);
-//        label1.setOpaque(true);
+
 
         label2 = new JLabel("Ϭ ");
 //        label.setText("ã =" + situationC.IndependentNodes);
