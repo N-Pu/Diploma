@@ -5,23 +5,18 @@ import back.sectionA.SituationA;
 import back.sectionC.SituationC;
 import back.sectionD.SituationD;
 import front.MyFrame;
-
-import java.awt.*;
-import java.io.*;
 import java.util.*;
 
 
 public class MainClass {
     public static void main(String[] args) {
         new MyFrame();
-        Map<Integer, ArrayList<Integer>> map = new HashMap<>();
+
         SituationA situationA = new SituationA();
         SituationC situationC = new SituationC();
         SituationD situationD = new SituationD();
 
         Scanner input = new Scanner(System.in);
-        Random random = new Random();
-        int C_for_Case_3 = random.nextInt(28) + 3;
         System.out.println("Please choice what split you wanna see:");
         int msg;
 
@@ -43,8 +38,6 @@ public class MainClass {
                 case 2 -> System.out.println("2");
                 case 3 -> {
                     System.out.println("3");
-
-//                    situationC.CreateGraph(random.nextInt(C_for_Case_3 * 2), C_for_Case_3);
                     situationC.CreateGraph(8, 4);
                     situationC.search_All_two_matches();
                 }
@@ -54,7 +47,6 @@ public class MainClass {
                     situationD.get_graph_and_cut_fictitious_node();
 
                 }
-
 
                 case 5 -> System.out.println("5");
                 case 0 -> System.out.println("End of process...");

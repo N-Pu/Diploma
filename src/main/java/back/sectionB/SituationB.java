@@ -4,11 +4,7 @@ import front.Styles;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.SingleGraph;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 public class SituationB {
 
@@ -19,15 +15,14 @@ public class SituationB {
     Set<String> C_Set = new HashSet<>();
     Graph graph = new SingleGraph("Situation_B");
     Styles styles = new Styles();
+    List<Integer> listOfDots = new LinkedList<>();
+    List<Integer> listOfSticks = new LinkedList<>();
 
 
     public static void main(String[] args) {
 
-
         SituationB situationB = new SituationB();
-
         situationB.fillUpArrayWithRandomNums(IndependentNodes, Clique);
-
         situationB.paintGraph(situationB.upList);
     }
 
@@ -92,5 +87,41 @@ public class SituationB {
         return past_size == size;
 
     }
+
+    public void GetAllSubGraphs() {
+
+
+        for (int i = 0; i < upList.size(); i++) {
+            int checkDot = 0;
+            int checkStick = 0;
+            for (int j = 0; j < upList.get(i).size(); j++) {
+                if (upList.get(i).get(j) == 0) {
+                    if ()
+                    checkDot++;
+
+                } else {
+
+                }
+            }
+        }
+
+    }
+
+    public boolean CheckForUsedDotes(int number) {
+        if (!listOfDots.contains(number)) {
+            listOfDots.add(number);
+            System.out.println("DOTS -> " + listOfDots);
+            return true;
+        }
+        return false;
+    }
+
+    public void CheckForUsedSticks(int number) {
+        if (!listOfSticks.contains(number)) {
+            listOfSticks.add(number);
+            System.out.println("STICKS -> " + listOfSticks);
+        }
+    }
+
 
 }
