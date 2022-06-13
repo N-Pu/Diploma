@@ -12,14 +12,14 @@ public class SituationD {
 
 
     //  Map<C,Array<N>> - every C node connected to N's array.
-    private static Map<Integer, ArrayList<Integer>> C_to_N_Hash = new HashMap<>();
+    private static final Map<Integer, ArrayList<Integer>> C_to_N_Hash = new HashMap<>();
     //  Set where we pull out every 2 Integers and
     //  connecting them with every C node.
     //  Map with all sub-graphs that I need.
     private int IndependentNodes, Clique;
-    private List<String> list = new LinkedList<>();
+    private final List<String> list = new LinkedList<>();
     int num_to_cut = 0;
-    private List<String> copy_list = new LinkedList<>();
+    private final List<String> copy_list = new LinkedList<>();
     Graph graph = new SingleGraph("Situation_D");
     Styles styles = new Styles();
 
@@ -112,7 +112,6 @@ public class SituationD {
                 check = C_to_N_Hash.get(i).size();
 
                 System.err.println("NODE C" + i + " CONTAINS ONLY 1 I ->" + C_to_N_Hash.get(i));
-//                System.exit(0);
                 break;
 
 
