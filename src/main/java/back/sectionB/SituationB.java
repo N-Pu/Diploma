@@ -8,7 +8,7 @@ import org.graphstream.graph.implementations.SingleGraph;
 import java.util.*;
 
 public class SituationB {
-
+    private static Map<Integer, ArrayList<Integer>> C_to_N_Hash = new HashMap<>();
     ArrayList<ArrayList<Integer>> upList = new ArrayList<>();
     Random random = new Random();
     static int IndependentNodes = 8;
@@ -201,5 +201,57 @@ public class SituationB {
         return false;
 
     }
+    public void paintGraph(int IndependentNodes) {
+        System.setProperty("org.graphstream.ui.renderer", "org.graphstream.ui.j2dviewer.J2DGraphRenderer");
+        graph.setAttribute("ui.stylesheet", styles.getStyleSheet());
+        System.out.println("-----------------");
+        for (int k = 0; k < IndependentNodes; k++) {
+            graph.addNode("I" + k);
+            graph.getNode("I" + k).setAttribute("xyz", 3, k, 2);
 
+            System.out.println("I" + k);
+        }
+
+        for (Node n : graph) {
+            System.out.println(n.getId());
+
+            n.setAttribute("ui.style", "fill-color: rgb(255,175,175);");
+        }
+
+
+        for (int i = 0; i < C_to_N_Hash.size(); i++) {
+            graph.addNode("C" + i);
+            for (int j = 0; j < C_to_N_Hash.get(i).size(); j++) {
+
+                System.out.println("I" + j);
+                graph.addEdge("C" + i + "I" + C_to_N_Hash.get(i).get(j), "C" + i, "I" + C_to_N_Hash.get(i).get(j));
+                System.out.println("C" + i + "->" + "I" + C_to_N_Hash.get(i).get(j));
+            }
+        }
+        int g = 0;
+        int l = 0;
+        int u = 0;
+        for (Node node : graph) {
+            node.setAttribute("ui.label", node.getId());
+            System.out.println("Node " + "[" + u + "]" + " degree is -> " + node.getDegree());
+            u++;
+            g= g + 5;
+            l++;
+        }
+
+        System.out.println("-----------------");
+        graph.display().disableAutoLayout();
+
+
+    }
+
+    public void action(){
+        SituationB situationB = new SituationB();
+        situationB.fillUpArrayWithRandomNums(IndependentNodes, Clique);
+        situationB.paintGraph(situationB.upList);
+        situationB.getR();
+    }
+    public void CleanUp() {
+        graph.clear();
+    }
 }

@@ -1,8 +1,11 @@
 package front;
 
 import back.sectionA.SituationA;
+import back.sectionB.SituationB;
 import back.sectionC.SituationC;
 import back.sectionD.SituationD;
+import back.sectionE.SituationE;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -33,6 +36,8 @@ public class MyFrame extends JFrame implements ActionListener {
         SituationA situationA = new SituationA();
         SituationC situationC = new SituationC();
         SituationD situationD = new SituationD();
+        SituationB situationB = new SituationB();
+        SituationE situationE = new SituationE();
         int randomFirst = Randomizer(18, 30);
         int randomSecond = Randomizer(1, 16);
 
@@ -51,7 +56,7 @@ public class MyFrame extends JFrame implements ActionListener {
 
         button2 = new JButton();
         button2.setBounds(10, 90, 120, 40);
-        button2.addActionListener(e -> situationA.CreateGraph(18, 6));
+        button2.addActionListener(e -> situationB.action());
         button2.setText("Situation B");
         button2.setFocusable(false);
         button2.setFont(new Font("Comic Sans", Font.BOLD, 16));
@@ -81,7 +86,7 @@ public class MyFrame extends JFrame implements ActionListener {
 
         button5 = new JButton();
         button5.setBounds(10, 270, 120, 40);
-        button5.addActionListener(e -> situationA.CreateGraph(18, 6));
+        button5.addActionListener(e -> situationE.action());
         button5.setText("Situation E");
         button5.setFocusable(false);
         button5.setFont(new Font("Comic Sans", Font.BOLD, 16));
@@ -93,6 +98,9 @@ public class MyFrame extends JFrame implements ActionListener {
         button6.setBounds(10, 400, 120, 50);
         button6.addActionListener(e -> situationA.CleanUp());
         button6.addActionListener(e -> situationC.CleanUp());
+        button6.addActionListener(e -> situationB.CleanUp());
+        button6.addActionListener(e -> situationD.CleanUp());
+        button6.addActionListener(e -> situationE.CleanUp());
         button6.setText("CLEAN");
         button6.setFocusable(false);
         button6.setFont(new Font("Comic Sans", Font.BOLD, 16));
@@ -127,7 +135,7 @@ public class MyFrame extends JFrame implements ActionListener {
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(null);
-        this.setSize(160, 500);
+        this.setSize(460, 500);
         this.setVisible(true);
         this.add(button1);
         this.add(button2);
