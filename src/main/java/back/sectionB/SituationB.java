@@ -4,19 +4,22 @@ import front.Styles;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.SingleGraph;
+
 import java.util.*;
 
 public class SituationB {
 
     ArrayList<ArrayList<Integer>> upList = new ArrayList<>();
     Random random = new Random();
-    static int IndependentNodes = 2;
-    static int Clique = 4;
+    static int IndependentNodes = 8;
+    static int Clique = 16;
     Set<String> C_Set = new HashSet<>();
     Graph graph = new SingleGraph("Situation_B");
     Styles styles = new Styles();
     List<Integer> listOfDots = new LinkedList<>();
     List<Integer> listOfSticks = new LinkedList<>();
+    List<Integer> listOfAllComponents = new LinkedList<>();
+    List<Integer> blockList = new LinkedList<>();
 
 
     public static void main(String[] args) {
@@ -24,6 +27,7 @@ public class SituationB {
         SituationB situationB = new SituationB();
         situationB.fillUpArrayWithRandomNums(IndependentNodes, Clique);
         situationB.paintGraph(situationB.upList);
+        situationB.getR();
     }
 
     public void fillUpArrayWithRandomNums(int IndependentNodes, int Clique) {
@@ -88,24 +92,35 @@ public class SituationB {
 
     }
 
-    public void GetAllSubGraphs() {
-
-
-        for (int i = 0; i < upList.size(); i++) {
-            int checkDot = 0;
-            int checkStick = 0;
-            for (int j = 0; j < upList.get(i).size(); j++) {
-                if (upList.get(i).get(j) == 0) {
-                    if ()
-                    checkDot++;
-
-                } else {
-
-                }
-            }
-        }
-
-    }
+//    public void GetAllSubGraphs() {
+//        listOfDots.clear();
+//        listOfSticks.clear();
+//
+//        for (int i = 0; i < upList.size(); i++) {
+//            int checkDot = 0;
+//            int checkStick = 0;
+//            for (int j = 0; j < upList.get(i).size(); j++) {
+//                if (upList.get(i).get(j) == 0 && checkDot == 0) {
+//                    if (CheckForUsedDotes(j))
+//                        checkDot++;
+//
+//                } else {
+//                    if (CheckForUsedSticks(j) && checkStick == 0) {
+//                        checkStick++;
+//                    }
+//                }
+//                if (checkDot == 1 && checkStick == 1) {
+//                    j = upList.get(i).size();
+//                }
+//            }
+//            if (checkDot == 0 || checkStick == 0) {
+//                System.err.println("ALL 0/1 IN ONE ARRAY!!! ");
+//                break;
+//            }
+//        }
+//        System.out.println("ALL DOTS   -> " + listOfDots);
+//        System.out.println("ALL STICKS -> " + listOfSticks);
+//    }
 
     public boolean CheckForUsedDotes(int number) {
         if (!listOfDots.contains(number)) {
@@ -116,12 +131,75 @@ public class SituationB {
         return false;
     }
 
-    public void CheckForUsedSticks(int number) {
+    public boolean CheckForUsedSticks(int number) {
         if (!listOfSticks.contains(number)) {
             listOfSticks.add(number);
             System.out.println("STICKS -> " + listOfSticks);
+            return true;
         }
+        return false;
     }
 
+
+    public void getR() {
+        listOfDots.clear();
+        listOfSticks.clear();
+        listOfAllComponents.clear();
+
+
+        for (int i = 0; i < upList.size(); i++) {
+            int checkDot = 0;
+            int checkStick = 0;
+            for (int j = 0; j < upList.get(i).size(); j++) {
+                if (upList.get(i).get(j) == 0 && checkDot == 0) {
+                    if (CheckForAll(j)) {
+                        if (blockList.isEmpty()) {
+                            checkDot++;
+                            listOfDots.add(j);
+                            blockList.add(j);
+                            System.out.println("D ->" + listOfDots);
+
+                        }
+                    }
+                }
+                if (upList.get(i).get(j) == 1 && checkStick == 0) {
+                    if ((CheckForAll(j))) {
+                        checkStick++;
+                        listOfSticks.add(j);
+                        System.out.println("S ->" + listOfSticks);
+                    }
+                }
+                if (checkDot == 1 && checkStick == 1) {
+                    break;
+                }
+            }
+            if (checkDot == 0 || checkStick == 0) {
+                System.err.println("Didn't find any matches!!! ");
+                blockPosition(i);
+                i = 0;
+
+            }
+        }
+        System.out.println("ALL DOTS   -> " + listOfDots);
+        System.out.println("ALL STICKS -> " + listOfSticks);
+    }
+
+
+    public boolean CheckForAll(int number) {
+        if (!listOfAllComponents.contains(number)) {
+            listOfAllComponents.add(number);
+            System.out.println("ALL -> " + listOfAllComponents);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean blockPosition(int number) {
+        if (blockList.contains(number)) {
+            return true;
+        }
+        return false;
+
+    }
 
 }
