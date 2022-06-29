@@ -1,5 +1,5 @@
 
-[wordpad_NLEZ6VNStm](https://user-images.githubusercontent.com/40484678/176433537-0fc6803b-2727-4204-bc98-f3c7a00524ee.png)
+![image](https://user-images.githubusercontent.com/40484678/176433537-0fc6803b-2727-4204-bc98-f3c7a00524ee.png)
 
 
 This was my diploma. Yep. Interesting stuff can be found there, or may be not.
